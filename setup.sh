@@ -1,39 +1,34 @@
 #!/bin/sh
 
-relative_path=$(dirname `realpath $0` | sed "s|$HOME|~|")
-
 if [ "$1" != "-f" ]; then
-  cat > /dev/stdout <<END_OF_HELP
+  cat << END_OF_HELP
 This script will create symlinks to each of the dotfiles in your home directory.
 
-It takes an optional '-f' operator which will overwrite any files without asking
-first and skip this message.
+Copies of any existing files will be created in ~/.dotfiles-backup. You can omit
+this warning by running "./setup.sh -f"
 
 Hit ENTER to continue or Ctrl+C to cancel
 END_OF_HELP
   read
 fi
 
+realpath() {
+  echo "$PWD/${1#./}"
+}
+
+relative_path=$(dirname `realpath "$0"` | sed "s|$HOME|~|")
+
 [ -f hooks/pre-up ] && ./hooks/pre-up
 
-for source in $(ls | grep -v '^\([A-Z]\|setup.sh|hooks\)'); do
-  destination=~/.$source
+for source in $(ls | grep -v '^\([A-Z]\|setup.sh\|hooks\)'); do
+  destination="$HOME"/.$source
 
-  if [ -f $destination ]; then
-    if [ "$1" != "-f" ]; then
-      printf "$destination already exists. Do you wish to overwrite? (Y/n) "
-      read overwrite
-    fi
+  if [ `readlink $destination` != "$relative_path/$source" ]; then
+    mkdir -p ~/.dotfiles-backup
+    mv $destination ~/.dotfiles-backup/
 
-    if [ "$1" = "-f" ] || [ "$overwrite" = "Y" ] || [ -z $overwrite ]; then
-      rm -f $destination
-    else
-      continue
-    fi
+    ln -sf "$relative_path/$source" $destination
   fi
-
-  echo $destination
-  ln -s $relative_path/$source $destination
 done
 
 [ -f hooks/post-up ] && ./hooks/post-up

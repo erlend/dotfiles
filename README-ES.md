@@ -40,8 +40,6 @@ configuración preestablecidas:
 
 * Excluye los archivos `README.md`, `README-ES.md` y `LICENSE`, que son parte
   del repositorio `dotfiles`, pero no necesitan enlazarse simbólicamente.
-* Le da precedencia a las modificaciones personales que por defecto están en
-  `~/dotfiles-local`
 * Por favor configura el archivo `rcrc` en caso de que quieras hacer
   modificaciones personales en un directorio distinto.
 
@@ -62,29 +60,25 @@ para actualizar pronto y muy seguido!
 Haz tus propias modificaciones
 ------------------------------
 
-Crea un directorio para tus modificaciones personales:
+Pon tus modificaciones en `~/` anexado con `.local`:
 
-    mkdir ~/dotfiles-local
-
-Pon tus modificaciones en `~/dotfiles-local` anexado con `.local`:
-
-* `~/dotfiles-local/aliases.local`
-* `~/dotfiles-local/git_template.local/*`
-* `~/dotfiles-local/gitconfig.local`
-* `~/dotfiles-local/psqlrc.local` (proveemos `.psqlrc.local` en blanco para prevenir que `psql`
+* `~/aliases.local`
+* `~/git_template.local/*`
+* `~/gitconfig.local`
+* `~/psqlrc.local` (proveemos `.psqlrc.local` en blanco para prevenir que `psql`
   arroje un error, pero debes sobreescribir el archivo con tu propia copia)
-* `~/dotfiles-local/tmux.conf.local`
-* `~/dotfiles-local/vimrc.local`
-* `~/dotfiles-local/vimrc.bundles.local`
-* `~/dotfiles-local/zshrc.local`
-* `~/dotfiles-local/zsh/configs/*`
+* `~/tmux.conf.local`
+* `~/vimrc.local`
+* `~/vimrc.bundles.local`
+* `~/zshrc.local`
+* `~/zsh/configs/*`
 
-Por ejemplo, tu `~/dotfiles-local/aliases.local` tal vez se vea así:
+Por ejemplo, tu `~/aliases.local` tal vez se vea así:
 
     # Productivity
     alias todo='$EDITOR ~/.todo'
 
-Tu `~/dotfiles-local/gitconfig.local` tal vez se vea así:
+Tu `~/gitconfig.local` tal vez se vea así:
 
     [alias]
       l = log --pretty=colored
@@ -94,7 +88,7 @@ Tu `~/dotfiles-local/gitconfig.local` tal vez se vea así:
       name = Dan Croak
       email = dan@thoughtbot.com
 
-Tu `~/dotfiles-local/vimrc.local` tal vez se vea así:
+Tu `~/vimrc.local` tal vez se vea así:
 
     " Color scheme
     colorscheme github
@@ -119,63 +113,19 @@ un plugin compartido con opciones personalizadas distintas.
     Plug '$HOME/plugins/vim-run-interactive'
 
 Para extender tus `git` hooks, crea scripts ejecutables en
-`~/dotfiles-local/git_template.local/hooks/*` files.
+`~/git_template.local/hooks/*` files.
 
-Tu `~/dotfiles-local/zshrc.local` tal vez se vea así:
+Tu `~/zshrc.local` tal vez se vea así:
 
     # load pyenv if available
     if which pyenv &>/dev/null ; then
       eval "$(pyenv init -)"
     fi
 
-Tu `~/dotfiles-local/vimrc.bundles.local` tal vez se vea así:
+Tu `~/vimrc.bundles.local` tal vez se vea así:
 
     Plug 'Lokaltog/vim-powerline'
     Plug 'stephenmckinney/vim-solarized-powerline'
-
-Configuraciones de zsh
-----------------------
-
-Configuraciones adicionales para zsh pueden ir en el directorio `~/dotfiles-local/zsh/configs`. Este
-tiene dos subdirectorios especiales: `pre` para archivos que deben ser cargados primero y `post`
-para archivos que deben cargarse al final.
-
-Por ejemplo, `~/dotfiles-local/zsh/configs/pre/virtualenv` hace uso de varias características
-de shell que tal vez se vean afectadas por tu configuración, por lo tanto cárgalo primero:
-
-    # Load the virtualenv wrapper
-    . /usr/local/bin/virtualenvwrapper.sh
-
-Establecer una vinculación clave puede ocurrir en `~/dotfiles-local/zsh/configs/keys`:
-
-    # Grep anywhere with ^G
-    bindkey -s '^G' ' | grep '
-
-Algunos cambios, como `chpwd`, deben ocurrir en `~/dotfiles-local/zsh/configs/post/chpwd`:
-
-    # Show the entries in a directory whenever you cd in
-    function chpwd {
-      ls
-    }
-
-Este directorio está a la mano para combinar dotfiles de múltiples equipos; un equipo
-puede agregar el archivo `virtualenv`, otro el archivo `keys` y un tercero el archivo `chpwd`.
-
-El archivo `~/dotfiles-local/zshrc.local` se carga después de `~/dotfiles-local/zsh/configs`.
-
-Configuraciones de vim
-----------------------
-
-Similar al directorio de configuración para zsh descrito arriba, vim
-automáticamente descarga los archivos en el directorio `~/dotfiles-local/vim/plugin`. Sin embargo, este no
-tiene el mismo soporte para los subdirectorios `pre` ni `post` que tiene nuestro `zshrc`.
-
-Este es un ejemplo `~/dotfiles-local/vim/plugin/c.vim`. Se carga cada vez que inicia vim,
-sin importar de nombre del archivo:
-
-    # Indent C programs according to BSD style(9)
-    set cinoptions=:0,t0,+4,(4
-    autocmd BufNewFile,BufRead *.[ch] setlocal sw=0 ts=8 noet
 
 Qué tiene dentro?
 -----------------
