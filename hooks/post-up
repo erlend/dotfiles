@@ -6,6 +6,11 @@ if [ ! -d "$HOME"/.zgen ]; then
   git clone https://github.com/tarjoilija/zgen.git "$HOME"/.zgen
 fi
 
+if [ ! -d "$HOME"/.tmux/plugins/tpm ]; then
+  git clone https://github.com/tmux-plugins/tpm "$HOME"/.tmux/plugins/tpm
+  "$HOME"/.tmux/plugins/tpm/bindings/install_plugins
+fi
+
 if [ -e "$HOME"/.vim/autoload/plug.vim ]; then
   vim -E -s +PlugUpgrade +qa
 else

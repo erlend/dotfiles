@@ -1,0 +1,42 @@
+text/html; ~/.mutt/view_attachment.sh %s html; test=test -z "$SSH_TTY"
+text/html; w3m -I %{charset} -T text/html; needsterminal
+text/html; w3m -I %{charset} -T text/html; copiousoutput
+
+image/jpg;   ~/.mutt/view_attachment.sh %s jpg
+image/jpeg;  ~/.mutt/view_attachment.sh %s jpg
+image/pjpeg; ~/.mutt/view_attachment.sh %s jpg
+image/png; ~/.mutt/view_attachment.sh %s png
+image/gif; ~/.mutt/view_attachment.sh %s gif
+image/svg+xml; ~/.mutt/view_attachment.sh %s svg
+
+video/*; ~/.mutt/view_attachment.sh %s -
+
+application/pdf; ~/.mutt/view_attachment.sh %s pdf
+
+application/msword; ~/.mutt/view_attachment.sh %s doc
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; ~/.mutt/view_attachment.sh %s docx
+application/vnd.openxmlformats-officedocument.wordprocessingml.template; ~/.mutt/view_attachment.sh %s dotx
+application/vnd.ms-word.document.macroEnabled.12; ~/.mutt/view_attachment.sh %s docm
+application/vnd.ms-word.template.macroEnabled.12; ~/.mutt/view_attachment.sh %s dotm
+
+application/vnd.ms-excel; ~/.mutt/view_attachment.sh %s xml
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; ~/.mutt/view_attachment.sh %s xlsx
+application/vnd.openxmlformats-officedocument.spreadsheetml.template; ~/.mutt/view_attachment.sh %s xltx
+application/vnd.ms-excel.sheet.macroEnabled.12; ~/.mutt/view_attachment.sh %s xlsm
+application/vnd.ms-excel.template.macroEnabled.12; ~/.mutt/view_attachment.sh %s xltm
+application/vnd.ms-excel.addin.macroEnabled.12; ~/.mutt/view_attachment.sh %s xlam
+application/vnd.ms-excel.sheet.binary.macroEnabled.12; ~/.mutt/view_attachment.sh %s xlsb
+
+application/vnd.ms-powerpoint; ~/.mutt/view_attachment.sh %s ppt
+
+application/vnd.openxmlformats-officedocument.presentationml.presentation; ~/.mutt/view_attachment.sh %s pptx
+application/vnd.openxmlformats-officedocument.presentationml.template; ~/.mutt/view_attachment.sh %s potx
+application/vnd.openxmlformats-officedocument.presentationml.slideshow; ~/.mutt/view_attachment.sh %s ppsx
+application/vnd.ms-powerpoint.addin.macroEnabled.12; ~/.mutt/view_attachment.sh %s ppam
+application/vnd.ms-powerpoint.presentation.macroEnabled.12; ~/.mutt/view_attachment.sh %s pptm
+application/vnd.ms-powerpoint.template.macroEnabled.12; ~/.mutt/view_attachment.sh %s potm
+application/vnd.ms-powerpoint.slideshow.macroEnabled.12; ~/.mutt/view_attachment.sh %s ppsm
+
+application/vnd.ms-access; ~/.mutt/view_attachment.sh %s mdb
+
+application/octet-stream; ~/.mutt/view_attachment.sh %s -

@@ -150,15 +150,18 @@ nnoremap <C-l> <C-w>l
 nnoremap ]r :ALENextWrap<CR>
 nnoremap [r :ALEPreviousWrap<CR>
 
-" Set spellfile to location that is guaranteed to exist, can be symlinked to
-" Dropbox or kept in Git and managed outside of thoughtbot/dotfiles using rcm.
-set spellfile=$HOME/.vim-spell-en.utf-8.add
-
 " Autocomplete with dictionary words when spell check is on
 set complete+=kspell
 
 " Always use vertical diffs
 set diffopt+=vertical
+
+" Run tests with dispatch.vim
+let test#strategy = "dispatch"
+
+" Fix syntax highlighting issues in .vue files
+autocmd FileType vue syntax sync fromstart
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
 " Local config
 if filereadable($HOME . "/.vimrc.local")

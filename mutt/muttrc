@@ -1,0 +1,38 @@
+source ~/.mutt/gpg.rc
+source ~/.mutt/view.rc
+source ~/.mutt/pager.rc
+source ~/.mutt/header.rc
+source ~/.mutt/compose.rc
+source ~/.mutt/sidebar.rc
+source ~/.mutt/bindings.rc
+source ~/.mutt/accounts/setup.rc
+source ~/.mutt/sort-threads.rc
+
+set alias_file       = ~/.mutt/alias.rc
+set header_cache     = ~/.mutt/cache/headers
+set message_cachedir = ~/.mutt/cache/bodies
+
+set wait_key = no       # don't ask to press key after common commands
+set mbox_type = Maildir # mailbox type
+set timeout = 10        # idle time before scanning
+set mail_check = 0      # minimum time between scans
+set pipe_decode         # strip headers and eval mimes when piping
+set thorough_search     # strip headers and eval mimes before searching
+unset mark_old          # read/new is good enough for me
+
+set delete
+unset move
+unset confirmappend
+
+# Show RFC2047-encoded MIME properties correctly
+set rfc2047_parameters
+
+# Show unicode characters properly
+set charset = "utf-8"
+
+# Setup PGP
+set pgp_use_gpg_agent = yes
+set pgp_timeout = 3600
+set crypt_replyencrypt = yes
+set crypt_replysign = yes
+set crypt_verify_sig = yes

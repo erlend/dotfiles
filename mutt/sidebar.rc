@@ -1,0 +1,8 @@
+# vi: ft=muttrc
+
+set sidebar_width   = 24
+set sidebar_format  = " %B %> %N/%S "
+
+set mail_check_stats = yes
+
+color sidebar_new cyan default

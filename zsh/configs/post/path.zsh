@@ -10,7 +10,7 @@ fi
 # support asdf installed with homebrew
 if [ -d "/usr/local/opt/asdf" ]; then
   . /usr/local/opt/asdf/asdf.sh
-  . /usr/local/opt/asdf/completions/asdf.bash
+  . /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
 fi
 
 # mkdir .git/safe in the root of repositories you trust

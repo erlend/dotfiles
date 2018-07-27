@@ -1,2 +1,6 @@
 !bin
-vim/bundle/
+vim/.netrwhist
+vim/autoload/*
+vim/bundle/*
+mutt/accounts/*
+mutt/cache/*

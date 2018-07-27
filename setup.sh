@@ -16,18 +16,22 @@ realpath() {
   echo "$PWD/${1#./}"
 }
 
-relative_path=$(dirname `realpath "$0"` | sed "s|$HOME|~|")
+#dotfiles_path=$(dirname `realpath "$0"` | sed "s|$HOME|~|")
+dotfiles_path=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
 
 [ -f hooks/pre-up ] && ./hooks/pre-up
 
 for source in $(ls | grep -v '^\([A-Z]\|setup.sh\|hooks\)'); do
-  destination="$HOME"/.$source
+  destination=~/.$source
+  destination_fullpath=$(readlink $destination | sed "s|$HOME|~|")
 
-  if [ `readlink $destination` != "$relative_path/$source" ]; then
-    mkdir -p ~/.dotfiles-backup
-    mv $destination ~/.dotfiles-backup/
+  source=$dotfiles_path/$source
 
-    ln -sf "$relative_path/$source" $destination
+  if [ "$destination_fullpath" != "$source" ]; then
+    mkdir -p "$HOME"/.dotfiles-backup
+    [ -f "$destination" ] && mv "$destination" ~/.dotfiles-backup/
+
+    ln -sf "$source" "$destination"
   fi
 done
 
