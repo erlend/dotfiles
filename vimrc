@@ -4,14 +4,15 @@ let mapleader = " "
 set backspace=2   " Backspace deletes like most programs in insert mode
 set nobackup
 set nowritebackup
-set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
+set noswapfile      " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
 set history=50
-set ruler         " show the cursor position all the time
-set showcmd       " display incomplete commands
-set incsearch     " do incremental searching
-set laststatus=2  " Always display the status line
-set autowrite     " Automatically :write before running commands
-
+set ruler           " show the cursor position all the time
+set showcmd         " display incomplete commands
+set incsearch       " do incremental searching
+set laststatus=2    " Always display the status line
+set autowrite       " Automatically :write before running commands
+set modelines=5     " Allow file specific vim configuration
+set ignorecase      " ignore case in patterns
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
@@ -49,10 +50,10 @@ augroup vimrcEx
   if g:has_async
     set updatetime=1000
     let g:ale_lint_on_text_changed = 0
-    autocmd CursorHold * call ale#Lint()
-    autocmd CursorHoldI * call ale#Lint()
-    autocmd InsertEnter * call ale#Lint()
-    autocmd InsertLeave * call ale#Lint()
+    " autocmd CursorHold * call ale#Lint()
+    " autocmd CursorHoldI * call ale#Lint()
+    " autocmd InsertEnter * call ale#Lint()
+    " autocmd InsertLeave * call ale#Lint()
   else
     echoerr "The thoughtbot dotfiles require NeoVim or Vim 8"
   endif
@@ -77,10 +78,10 @@ set nojoinspaces
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
+  set grepprg=ag\ --vimgrep\ --smart-case
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag --literal --files-with-matches --nocolor --hidden -g "" %s'
+  let g:ctrlp_user_command = 'ag %s --nogroup --nocolor -g ""'
 
   " ag is fast enough that CtrlP doesn't need to cache
   let g:ctrlp_use_caching = 0
@@ -130,6 +131,9 @@ nnoremap <silent> <Leader>l :TestLast<CR>
 nnoremap <silent> <Leader>a :TestSuite<CR>
 nnoremap <silent> <Leader>gt :TestVisit<CR>
 
+" Run tests with dispatch.vim
+let test#strategy = "dispatch"
+
 " Run commands that require an interactive shell
 nnoremap <Leader>r :RunInInteractiveShell<Space>
 
@@ -156,12 +160,7 @@ set complete+=kspell
 " Always use vertical diffs
 set diffopt+=vertical
 
-" Run tests with dispatch.vim
-let test#strategy = "dispatch"
-
-" Fix syntax highlighting issues in .vue files
-autocmd FileType vue syntax sync fromstart
-autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+autocmd FileType mail setlocal formatoptions+=aw
 
 " Local config
 if filereadable($HOME . "/.vimrc.local")
