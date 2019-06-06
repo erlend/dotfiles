@@ -29,8 +29,20 @@ bind pager R  group-reply
 bind attach <return> view-mailcap
 
 # Open URLs in browser
-macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
-macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro index,pager \cb "\
+        <enter-command> set my_pdsave=\$pipe_decode<enter>\
+        <enter-command> unset pipe_decode<enter>\
+        <pipe-message>extract_url<enter>\
+        <enter-command> set pipe_decode=\$my_pdsave<enter>" \
+        "extract URLs from a message"
+macro attach,compose \cb "\
+        <enter-command> set my_pdsave=\$pipe_decode<enter>\
+        <enter-command> unset pipe_decode<enter>\
+        <pipe-message>extract_url<enter>\
+        <enter-command> set pipe_decode=\$my_pdsave<enter>" \
+        "extract URLs from a message"
+# macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+# macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 
 # Sidebar
 bind index B bounce-message # rebind bounce to B

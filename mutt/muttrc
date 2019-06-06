@@ -12,13 +12,14 @@ set alias_file       = ~/.mutt/alias.rc
 set header_cache     = ~/.mutt/cache/headers
 set message_cachedir = ~/.mutt/cache/bodies
 
-set wait_key = no       # don't ask to press key after common commands
+unset wait_key          # don't ask to press key after common commands
 set mbox_type = Maildir # mailbox type
 set timeout = 10        # idle time before scanning
 set mail_check = 0      # minimum time between scans
 set pipe_decode         # strip headers and eval mimes when piping
 set thorough_search     # strip headers and eval mimes before searching
 unset mark_old          # read/new is good enough for me
+set text_flowed         # no ugly line breaks in GUI mail readers
 
 set delete
 unset move
@@ -31,8 +32,8 @@ set rfc2047_parameters
 set charset = "utf-8"
 
 # Setup PGP
-set pgp_use_gpg_agent = yes
+set pgp_use_gpg_agent
 set pgp_timeout = 3600
-set crypt_replyencrypt = yes
-set crypt_replysign = yes
-set crypt_verify_sig = yes
+set crypt_replyencrypt
+set crypt_replysign
+set crypt_verify_sig

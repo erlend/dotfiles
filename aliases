@@ -16,5 +16,8 @@ alias rc="bin/rails console"
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
 
+# msmtp-queue wrapper
+alias msmtp-queue="/usr/local/share/msmtp/scripts/msmtpq/msmtpq --q-mgmt"
+
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local

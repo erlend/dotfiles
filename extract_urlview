@@ -1,0 +1,3 @@
+COMMAND open %s
+DEFAULT_VIEW context
+RAW_RESERVED
